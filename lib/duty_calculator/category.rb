@@ -4,7 +4,8 @@ module DutyCalculator
   class Category
     def self.list_all
       conn = DutyCalculator::Client.new
-      conn.get "#{DutyCalculator::Client.api_base}/categories"
+      resp = conn.get "#{DutyCalculator::Client.api_base}/categories"
+      resp.body
     end
   end
 end
