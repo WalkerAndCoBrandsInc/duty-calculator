@@ -45,12 +45,12 @@ module DutyCalculator
 #
 =end
     def self.get(params={})
-
       uri = Addressable::URI.new
       uri.query_values = validate_params(params)
 
       conn = DutyCalculator::Client.new
-      conn.get "#{DutyCalculator::Client.api_base}/calculation"
+      resp = conn.get "#{DutyCalculator::Client.api_base}/calculation"
+      resp.body
     end
   end
 end
