@@ -1,0 +1,4 @@
+:api_root: http://www.dutycalculator.com/
+:api_version: api2.1
+:sandbox: false
+:debug: false
