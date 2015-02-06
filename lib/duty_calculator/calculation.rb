@@ -10,7 +10,7 @@ module DutyCalculator
                       sku value weight qty origin reference}
         msg = []
         required.each do |r|
-          msg << r unless params.has_key?(r)
+          msg << r unless params.inject({}){|memo,(k,v)| memo[k.to_s] = v; memo}.has_key?(r)
         end
         raise ArgumentError, "Missing arguments from hash #{msg.to_s}" if msg.size
         return params
@@ -56,4 +56,3 @@ module DutyCalculator
     end
   end
 end
-
