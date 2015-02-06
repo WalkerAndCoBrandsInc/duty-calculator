@@ -4,8 +4,9 @@ module DutyCalculator
   class Calculation
     class << self
       def validate_params(params)
-        required = %w{from to province shipping_mode commercial_importer imported_wt imported_value classify_by shipping
-                      insurance currency preferential_rates detailed_result incl_hs_codes cat hs country_of_hs_code desc
+        required = %w{from to shipping_mode classify_by shipping
+                      insurance currency preferential_rates detailed_result incl_hs_codes cat
+                      hs country_of_hs_code desc
                       sku value weight qty origin reference}
         msg = []
         required.each do |r|
@@ -38,7 +39,8 @@ module DutyCalculator
 # &reference[0]={product reference}  \
 # &shipping={shipping cost} \
 # &insurance={cost of insurance} \
-# &currency={ISO currency code} \preferential&output_currency={ISO currency code} \
+# &currency={ISO currency code} \preferential
+# &output_currency={ISO currency code} \
 # &preferential_rates={1 to apply FTA and preferential rates, 0 to ignore FTA and preferential rates} \
 # &detailed_result={1 for detailed result, 0 for short result} \
 # &incl_hs_codes={include HS code for each item in response}
@@ -49,7 +51,7 @@ module DutyCalculator
       uri.query_values = validate_params(params)
 
       conn = DutyCalculator::Client.new
-      resp = conn.get "#{DutyCalculator::Client.api_base}/calculation"
+      resp = conn.get "#{DutyCalculator::Client.api_base}/calculation?#{uri.query}"
       resp.body
     end
   end
