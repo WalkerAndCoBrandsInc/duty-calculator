@@ -16,10 +16,26 @@ module DutyCalculator
         raise ArgumentError, "Missing arguments from hash #{msg.to_s}" if msg.size >= 1
         return params
       end
+
+      def transform_params(params)
+        params.inject({}) do |transformed, key_value|
+          k = key_value.first
+          v = key_value.last
+          if v.kind_of?(Array)
+            transformed[k] = {}
+            v.each_with_index do |value, index|
+              transformed[k][index] = value
+            end
+          else
+            transformed[k] = v
+          end
+          transformed
+        end
+      end
     end
 
     def self.get(params={})
-      transformed_params = transform_params(params)
+      transformed_params = transform_params(validate_params(params))
       conn = DutyCalculator::Client.new
       resp = conn.get "#{DutyCalculator::Client.api_base}/calculation", transformed_params
       raise Exception, "Duty Calculator Error: #{DutyCalculator::ErrorMessages.for_code(resp.body["error"]["code"])}" if resp.body["error"]
@@ -27,20 +43,5 @@ module DutyCalculator
       return resp.body
     end
 
-    def self.transform_params(params)
-      params.inject({}) do |transformed, key_value|
-        k = key_value.first.to_s
-        v = key_value.last
-        if v.kind_of?(Array)
-          transformed[k] = {}
-          v.each_with_index do |value, index|
-            transformed[k][index] = value
-          end
-        else
-          transformed[k] = v
-        end
-        transformed
-      end
-    end
   end
 end
