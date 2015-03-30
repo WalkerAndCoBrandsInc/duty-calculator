@@ -19,23 +19,28 @@ module DutyCalculator
     end
 
     def self.get(params={})
-      qs = params.collect do |k,v|
-            if v.kind_of?(Array)
-              memo = ""
-              v.each_with_index do |value, index|
-                memo << "#{k}[#{index}]=#{value}"
-                memo << "&" if v.size > (index+1)
-              end
-              memo
-            else
-              "#{k}=#{v}"
-            end
-          end
+      transformed_params = transform_params(params)
       conn = DutyCalculator::Client.new
-      resp = conn.get "#{DutyCalculator::Client.api_base}/calculation?#{qs.join('&')}"
+      resp = conn.get "#{DutyCalculator::Client.api_base}/calculation", transformed_params
       raise Exception, "Duty Calculator Error: #{DutyCalculator::ErrorMessages.for_code(resp.body["error"]["code"])}" if resp.body["error"]
       raise Exception, "HTTP Status Code #{resp.status}" if resp.status.to_i != 200
       return resp.body
+    end
+
+    def self.transform_params(params)
+      params.inject({}) do |transformed, key_value|
+        k = key_value.first.to_s
+        v = key_value.last
+        if v.kind_of?(Array)
+          transformed[k] = {}
+          v.each_with_index do |value, index|
+            transformed[k][index] = value
+          end
+        else
+          transformed[k] = v
+        end
+        transformed
+      end
     end
   end
 end
