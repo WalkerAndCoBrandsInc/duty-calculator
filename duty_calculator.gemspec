@@ -6,8 +6,8 @@ require 'duty_calculator/version'
 Gem::Specification.new do |spec|
   spec.name          = "duty_calculator"
   spec.version       = DutyCalculator::VERSION
-  spec.authors       = ["Thomas Hanley"]
-  spec.email         = ["tom@walkerandcompany.com"]
+  spec.authors       = ["Thomas Hanley", "Rachel Heaton"]
+  spec.email         = ["tom@walkerandcompany.com", "rachel@walkerandcompany.com"]
   spec.summary       = %q{Wrapper for dutycalculator.com}
   spec.description   = %q{API documentation http://www.dutycalculator.com/api-center/dutycalculator-api-2-1-documentation/}
   spec.homepage      = "https://github.com/tjhanley/duty-calculator"
