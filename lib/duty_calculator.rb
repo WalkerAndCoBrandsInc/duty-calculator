@@ -3,6 +3,7 @@ require "duty_calculator/configuration"
 require "duty_calculator/currency"
 require "duty_calculator/category"
 require "duty_calculator/calculation"
+require "duty_calculator/helper"
 require "duty_calculator/error_messages"
 
 require "faraday"

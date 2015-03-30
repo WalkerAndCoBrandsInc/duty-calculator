@@ -40,7 +40,7 @@ module DutyCalculator
       resp = conn.get "#{DutyCalculator::Client.api_base}/calculation", transformed_params
       raise Exception, "Duty Calculator Error: #{DutyCalculator::ErrorMessages.for_code(resp.body["error"]["code"])}" if resp.body["error"]
       raise Exception, "HTTP Status Code #{resp.status}" if resp.status.to_i != 200
-      return resp.body
+      return DutyCalculator::Helper.format_response(resp.body)
     end
 
   end
