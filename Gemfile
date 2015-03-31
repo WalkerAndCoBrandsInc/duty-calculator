@@ -5,6 +5,7 @@ gemspec
 gem 'rspec', :require => 'spec'
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'hashie'
 gem 'multi_xml'
 gem 'addressable'
 gem 'vcr'

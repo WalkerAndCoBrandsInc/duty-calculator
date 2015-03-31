@@ -86,10 +86,13 @@ module DutyCalculator
         end
         it 'makes a nice hash' do
           VCR.use_cassette('calculate__nice_hash_for_single_product') do
-            response = DutyCalculator::Calculation.get(params)
-            expect(response["duty_calculation"]["item"]["id"].class).to eq(String)
-            expect(response["duty_calculation"]["item"]["hs_code"].class).to eq(String)
-            expect(response["duty_calculation"]["item"]["sales_tax"]["amount"]["__content__"].class).to eq(Float)
+            duty_calculation = DutyCalculator::Calculation.get(params)
+            expect(duty_calculation.item.id.class).to eq(String)
+            expect(duty_calculation.item.hs_code.class).to eq(String)
+            expect(duty_calculation.item.sales_tax.amount.value.class).to eq(Float)
+            expect(duty_calculation.total_charges.duty.amount.currency.class).to eq(String)
+            expect(duty_calculation.total_charges.sales_tax.name).to eq("GST")
+            expect(duty_calculation.total_charges.sales_tax.amount.value.class).to eq(Float)
           end
         end
       end
@@ -123,12 +126,11 @@ module DutyCalculator
 
         it 'makes a nice hash' do
           VCR.use_cassette('calculate__nice_hash_for_multiple_products') do
-            response = DutyCalculator::Calculation.get(params)
-            response["duty_calculation"]["item"].each do |item|
-              expect(item["id"].class).to eq(String)
-              expect(item["hs_code"].class).to eq(String)
-              expect(item["sales_tax"]["amount"]["__content__"].class).to eq(Float)
-            end
+            duty_calculation = DutyCalculator::Calculation.get(params)
+            expect(duty_calculation.item.size).to eq(2)
+            expect(duty_calculation.total_charges.duty.amount.currency.class).to eq(String)
+            expect(duty_calculation.total_charges.sales_tax.name).to eq("GST")
+            expect(duty_calculation.total_charges.sales_tax.amount.value.class).to eq(Float)
           end
         end
       end
