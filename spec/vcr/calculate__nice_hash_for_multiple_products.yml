@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.dutycalculator.com/api2.1/sandbox/DUTY_CALC/calculation?cat%5B%5D=522&cat%5B%5D=522&classify_by=cat&commercial_importer=0&country_of_hs_code%5B%5D=CN&country_of_hs_code%5B%5D=DE&currency=USD&desc%5B%5D=Hydrotherapy%20Spa%20Bath&desc%5B%5D=Hydrotherapy%20Spa%20Bath&detailed_result=1&from=US&hs%5B%5D=9019100020&hs%5B%5D=9019100020&incl_hs_codes=1&insurance=0.0&origin=US&preferential_rates=0&qty%5B%5D=1&qty%5B%5D=2&reference=ORD12345&shipping=10.0&shipping_mode=USPS&sku%5B%5D=300101&sku%5B%5D=300102&to=CA&value%5B%5D=1234.00&value%5B%5D=2345.67&weight%5B%5D=1.0&weight%5B%5D=2.0&weight_unit%5B%5D=lb&weight_unit%5B%5D=lb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.6.1
+      Date:
+      - Mon, 30 Mar 2015 23:38:08 GMT
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.5
+      Set-Cookie:
+      - DebugLevel=0; expires=Wed, 29-Apr-2015 23:38:02 GMT; Max-Age=2592000; path=/
+      - PHPSESSID=r063q1h863c4k1590p9n4fbsm0; path=/
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<duty-calculation id=\"191674998\">\n\t<item
+        id=\"522\" hs-code=\"9019100020\" reference=\"0\" quality-score=\"validated\">\n\t\t<customs-value
+        name=\"FOB\">\n\t\t\t<amount currency=\"CAD\">1556</amount>\n\t\t</customs-value>\n\t\t<duty>\n\t\t\t<amount
+        currency=\"CAD\">0</amount>\n\t\t</duty>\n\t\t<sales-tax name=\"GST\">\n\t\t\t<amount
+        currency=\"CAD\">77.8</amount>\n\t\t</sales-tax>\n\t\t<total>\n\t\t\t<amount
+        currency=\"CAD\">77.8</amount>\n\t\t</total>\n\t</item>\n\t<item id=\"522\"
+        hs-code=\"9019100020\" reference=\"1\" quality-score=\"validated\">\n\t\t<customs-value
+        name=\"FOB\">\n\t\t\t<amount currency=\"CAD\">5915.49</amount>\n\t\t</customs-value>\n\t\t<duty>\n\t\t\t<amount
+        currency=\"CAD\">0</amount>\n\t\t</duty>\n\t\t<sales-tax name=\"GST\">\n\t\t\t<amount
+        currency=\"CAD\">295.77</amount>\n\t\t</sales-tax>\n\t\t<total>\n\t\t\t<amount
+        currency=\"CAD\">295.77</amount>\n\t\t</total>\n\t</item>\n\t<total-charges>\n\t\t<customs-value
+        name=\"FOB\">\n\t\t\t<amount currency=\"CAD\">7471.49</amount>\n\t\t</customs-value>\n\t\t<duty>\n\t\t\t<amount
+        currency=\"CAD\">0</amount>\n\t\t</duty>\n\t\t<sales-tax name=\"GST\">\n\t\t\t<amount
+        currency=\"CAD\">373.57</amount>\n\t\t</sales-tax>\n\t\t<total>\n\t\t\t<amount
+        currency=\"CAD\">373.57</amount>\n\t\t</total>\n\t</total-charges>\n</duty-calculation>\n"
+    http_version: 
+  recorded_at: Mon, 30 Mar 2015 23:35:40 GMT
+recorded_with: VCR 2.9.3

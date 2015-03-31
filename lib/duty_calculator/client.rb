@@ -6,8 +6,6 @@ module DutyCalculator
         # middleware
         faraday.use FaradayMiddleware::FollowRedirects
         faraday.use FaradayMiddleware::EncodeJson
-        # request defs
-        faraday.use Faraday::Request::UrlEncoded
         # response defs
         faraday.use Faraday::Response::ParseXml
         faraday.use Faraday::Response::Mashify

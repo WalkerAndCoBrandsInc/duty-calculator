@@ -5,10 +5,14 @@ require "duty_calculator"
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+ABS_PATH = File.expand_path(File.dirname(File.dirname(__FILE__)))
+Dir[File.join(ABS_PATH, "spec/support/**/*.rb")].each {|f| require f}
+
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
+  config.raise_errors_for_deprecations!
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
