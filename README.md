@@ -37,6 +37,31 @@ end
 
 ```
 
+### Get Calculation
+
+```
+duty_calculation = DutyCalculator::Calculation.get(params)
+
+0> duty_calculation.keys
+=> ["id", "item", "total_charges"]
+
+0> duty_calculation.total_charges.keys
+=> ["customs_value", "duty", "sales_tax", "total"]
+
+0> duty_calculation.total_charges.customs_value
+=> #<Hashie::Mash amount=#<Hashie::Mash currency="CAD" value=1556.0> name="FOB">
+
+0> duty_calculation.total_charges.sales_tax
+=> #<Hashie::Mash amount=#<Hashie::Mash currency="CAD" value=77.8> name="GST">
+
+0> duty_calculation.total_charges.duty
+=> #<Hashie::Mash amount=#<Hashie::Mash currency="CAD" value=0.0>>
+
+0> duty_calculation.total_charges.total
+=> #<Hashie::Mash amount=#<Hashie::Mash currency="CAD" value=77.8>>
+
+```
+
 ### Listing Categories
 
 ```ruby
@@ -82,6 +107,11 @@ end
    }
  }
 ```
+
+## TODO
+
+- Port other objects to response nicer objects with `Hashie::Mash`
+- Coerce sub `Array` for `item` to use `Response` object
 
 ## Contributing
 
