@@ -3,10 +3,12 @@ require "duty_calculator/configuration"
 require "duty_calculator/currency"
 require "duty_calculator/category"
 require "duty_calculator/calculation"
+require "duty_calculator/response"
 require "duty_calculator/error_messages"
 
 require "faraday"
 require "faraday_middleware"
+require "hashie"
 
 module DutyCalculator
   class << self
