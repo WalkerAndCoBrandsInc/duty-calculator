@@ -1,5 +1,5 @@
+# encoding: utf-8
 module DutyCalculator
-
   class Dootie < StandardError
     def initialize(data=nil)
       @data = data
