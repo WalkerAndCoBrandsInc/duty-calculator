@@ -10,7 +10,7 @@ module DutyCalculator
         faraday.use Faraday::Response::ParseXml
         faraday.use Faraday::Response::Mashify
         faraday.use Faraday::Response::RaiseError unless DutyCalculator.configuration.debug
-        faraday.response :logger if DutyCalculator.configuration.debug
+        faraday.response :logger, DutyCalculator.configuration.logger
 
         faraday.adapter ::Faraday.default_adapter
       end

@@ -1,10 +1,11 @@
 require "yaml"
-
+require 'logger'
 require "duty_calculator"
 
 module DutyCalculator
   class Configuration
-    attr_accessor :api_root, :api_version, :api_key, :api_base, :sandbox, :debug
+    attr_accessor :api_root, :api_version, :api_key, :api_base, :sandbox, :debug, :logger
+
 
     def initialize
       defaults = load_defaults
@@ -12,6 +13,7 @@ module DutyCalculator
       @api_version = defaults[:api_version]
       @sandbox = defaults[:sandbox]
       @debug = defaults[:debug]
+      @logger = ::Logger.new(STDOUT)
     end
 
     private
