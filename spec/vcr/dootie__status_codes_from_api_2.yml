@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.dutycalculator.com/api2.1/sandbox/DUTY_CALC/calculation?cat%5B%5D=9999999999999999999992&classify_by=cat&commercial_importer=0&country_of_hs_code%5B%5D=CN&currency=USD&desc%5B%5D=Hydrotherapy%20Spa%20Bath&detailed_result=1&from=US&hs%5B%5D=9019100020&incl_hs_codes=1&insurance=0.0&origin=US&preferential_rates=0&qty%5B%5D=1&reference=ORD12345&shipping=10.0&shipping_mode=USPS&sku%5B%5D=300101&to=CA&value%5B%5D=1234.00&weight%5B%5D=1.0&weight_unit%5B%5D=lb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx/1.6.1
+      Date:
+      - Wed, 01 Apr 2015 18:33:37 GMT
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - PHP/5.5.9-1ubuntu4.5
+      Set-Cookie:
+      - DebugLevel=0; expires=Fri, 01-May-2015 18:33:37 GMT; Max-Age=2592000; path=/
+      - PHPSESSID=njctv8db05jj19cpk6p42qm621; path=/
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <error><code>4747</code><message>Reference 0 could not be autoclassified</message></error>
+    http_version: 
+  recorded_at: Wed, 01 Apr 2015 18:31:08 GMT
+recorded_with: VCR 2.9.3

@@ -1,5 +1,6 @@
 require "duty_calculator/client"
 require "duty_calculator/response"
+require "duty_calculator/dootie"
 require "addressable/uri"
 module DutyCalculator
   class Calculation
@@ -37,12 +38,17 @@ module DutyCalculator
 
     def self.get(params={})
       transformed_params = transform_params(validate_params(params))
+      # initialize connection
       conn = DutyCalculator::Client.new
+
       resp = conn.get "#{DutyCalculator::Client.api_base}/calculation", transformed_params
       hashed_resp = DutyCalculator::Response.new(resp.to_hash)
       resp = Hashie::Mash.new(hashed_resp)
-      raise Exception, "Duty Calculator Error: #{DutyCalculator::ErrorMessages.for_code(resp.body.error.code)}" if resp.body.error
-      raise Exception, "HTTP Status Code #{resp.status}" if resp.status.to_i != 200
+
+      if resp.body["error"]
+        return DutyCalculator::Dootie.new({message: "[DutyCalculator][Error]:", error: resp.body["error"]})
+      end
+
       resp.body.duty_calculation
     end
   end
