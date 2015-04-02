@@ -10,3 +10,4 @@ gem 'multi_xml'
 gem 'addressable'
 gem 'vcr'
 gem 'webmock'
+gem "faraday-detailed_logger"
