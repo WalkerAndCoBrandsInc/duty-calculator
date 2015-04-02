@@ -1,4 +1,6 @@
-require 'duty_calculator'
+require "duty_calculator"
+require "faraday/detailed_logger"
+
 module DutyCalculator
   class Client
     def self.new
@@ -10,7 +12,11 @@ module DutyCalculator
         faraday.use Faraday::Response::ParseXml
         faraday.use Faraday::Response::Mashify
         faraday.use Faraday::Response::RaiseError unless DutyCalculator.configuration.debug
-        faraday.response :logger, DutyCalculator.configuration.logger
+        if DutyCalculator.configuration.debug
+          faraday.response :detailed_logger, DutyCalculator.configuration.logger
+        else
+          faraday.response :logger, DutyCalculator.configuration.logger
+        end
 
         faraday.adapter ::Faraday.default_adapter
       end
